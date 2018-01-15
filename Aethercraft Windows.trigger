@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.001">
+    <TriggerPackage>
+        <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+            <name>grid lock</name>
+            <script>allmodules = {}
+turret_check = false
+grid_container:show()
+send(&quot;grid modules&quot;)</script>
+            <triggerType>0</triggerType>
+            <conditonLineDelta>0</conditonLineDelta>
+            <mStayOpen>0</mStayOpen>
+            <mCommand></mCommand>
+            <packageName></packageName>
+            <mFgColor>#ff0000</mFgColor>
+            <mBgColor>#ffff00</mBgColor>
+            <mSoundFile></mSoundFile>
+            <colorTriggerFgColor>#000000</colorTriggerFgColor>
+            <colorTriggerBgColor>#000000</colorTriggerBgColor>
+            <regexCodeList>
+                <string>You step up to the empathic grid, locking yourself into the module and linking your mind to the controls of the ship. After a moment, you begin to sense your command of the module in your own brain.</string>
+            </regexCodeList>
+            <regexCodePropertyList>
+                <integer>3</integer>
+            </regexCodePropertyList>
+        </Trigger>
+        <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+            <name>grid unlock</name>
+            <script>allmodules = {}
+turret_check = false
+grid_container:hide()</script>
+            <triggerType>0</triggerType>
+            <conditonLineDelta>0</conditonLineDelta>
+            <mStayOpen>0</mStayOpen>
+            <mCommand></mCommand>
+            <packageName></packageName>
+            <mFgColor>#ff0000</mFgColor>
+            <mBgColor>#ffff00</mBgColor>
+            <mSoundFile></mSoundFile>
+            <colorTriggerFgColor>#000000</colorTriggerFgColor>
+            <colorTriggerBgColor>#000000</colorTriggerBgColor>
+            <regexCodeList>
+                <string>With a long, slow blink, you allow your mind to drift free from the ship, and release your lock on the command of the empathic grid.</string>
+            </regexCodeList>
+            <regexCodePropertyList>
+                <integer>3</integer>
+            </regexCodePropertyList>
+        </Trigger>
+        <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+            <name>grid capture</name>
+            <script>
+local module = matches[2]
+if module == &quot;chair&quot; then
+allmodules[&quot;chair&quot;] = matches[3]
+end
+if module == &quot;grid&quot; then
+allmodules[&quot;grid&quot;] = matches[3]
+end
+if module == &quot;turret&quot; then
+	if turret_check == false then
+		allmodules[&quot;turret1&quot;] = matches[3]
+		turret_check = 1
+	elseif turret_check == 1 then
+		allmodules[&quot;turret2&quot;] = matches[3]
+		turret_check = 2
+	elseif turret_check == 2 then
+		allmodules[&quot;turret3&quot;] = matches[3]
+		turret_check = false
+	end
+end
+if module == &quot;orb&quot; then
+	allmodules[&quot;orb&quot;] = matches[3]
+end</script>
+            <triggerType>0</triggerType>
+            <conditonLineDelta>0</conditonLineDelta>
+            <mStayOpen>0</mStayOpen>
+            <mCommand></mCommand>
+            <packageName></packageName>
+            <mFgColor>#ff0000</mFgColor>
+            <mBgColor>#ffff00</mBgColor>
+            <mSoundFile></mSoundFile>
+            <colorTriggerFgColor>#000000</colorTriggerFgColor>
+            <colorTriggerBgColor>#000000</colorTriggerBgColor>
+            <regexCodeList>
+                <string>^\&quot;(chair|grid|turret|collector|orb|ramhead)(\d+)\&quot;\s+(the command chair|a battle turret|a shield orb|the empathic grid|an energy collector)\s+(\d+)\% / (no damage|light damage|heavy damage|moderate damage|critical damage)(?:\s+\[(\w+)\]|)</string>
+            </regexCodeList>
+            <regexCodePropertyList>
+                <integer>1</integer>
+            </regexCodePropertyList>
+        </Trigger>
+        <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+            <name>chair lock</name>
+            <script>chair_container:show()</script>
+            <triggerType>0</triggerType>
+            <conditonLineDelta>0</conditonLineDelta>
+            <mStayOpen>0</mStayOpen>
+            <mCommand></mCommand>
+            <packageName></packageName>
+            <mFgColor>#ff0000</mFgColor>
+            <mBgColor>#ffff00</mBgColor>
+            <mSoundFile></mSoundFile>
+            <colorTriggerFgColor>#000000</colorTriggerFgColor>
+            <colorTriggerBgColor>#000000</colorTriggerBgColor>
+            <regexCodeList>
+                <string>You step up to the command chair, locking yourself into the module and linking your mind to the controls of the ship. After a moment, you begin to sense your command of the module in your own brain.</string>
+            </regexCodeList>
+            <regexCodePropertyList>
+                <integer>3</integer>
+            </regexCodePropertyList>
+        </Trigger>
+        <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+            <name>chair unlock</name>
+            <script>chair_container:hide()</script>
+            <triggerType>0</triggerType>
+            <conditonLineDelta>0</conditonLineDelta>
+            <mStayOpen>0</mStayOpen>
+            <mCommand></mCommand>
+            <packageName></packageName>
+            <mFgColor>#ff0000</mFgColor>
+            <mBgColor>#ffff00</mBgColor>
+            <mSoundFile></mSoundFile>
+            <colorTriggerFgColor>#000000</colorTriggerFgColor>
+            <colorTriggerBgColor>#000000</colorTriggerBgColor>
+            <regexCodeList>
+                <string>With a long, slow blink, you allow your mind to drift free from the ship, and release your lock on the command of the command chair.</string>
+            </regexCodeList>
+            <regexCodePropertyList>
+                <integer>3</integer>
+            </regexCodePropertyList>
+        </Trigger>
+    </TriggerPackage>
+    <TimerPackage>
+        <Timer isActive="no" isFolder="no" isTempTimer="no" isOffsetTimer="no">
+            <name>grid_drag_window</name>
+            <script>local x, y = getMousePosition()
+grid_container:move(x, y)
+grid_x = x
+grid_y = y</script>
+            <command></command>
+            <packageName></packageName>
+            <time>00:00:00.025</time>
+        </Timer>
+        <Timer isActive="no" isFolder="no" isTempTimer="no" isOffsetTimer="no">
+            <name>chair_drag_window</name>
+            <script>local x, y = getMousePosition()
+chair_container:move(x, y)
+chair_x = x
+chair_y = y</script>
+            <command></command>
+            <packageName></packageName>
+            <time>00:00:00.025</time>
+        </Timer>
+    </TimerPackage>
+    <AliasPackage/>
+    <ActionPackage/>
+    <ScriptPackage>
+        <Script isActive="yes" isFolder="no">
+            <name>Grid Window</name>
+            <packageName></packageName>
+            <script>grid_x = grid_x or 10
+grid_y = gird_y or 10
+target_ship = 11111
+allmodules = {}
+allmodules[&quot;grid&quot;] = 1
+allmodules[&quot;chair&quot;] = 1
+allmodules[&quot;turret1&quot;] = 1
+allmodules[&quot;turret2&quot;] = 1
+allmodules[&quot;turret3&quot;] = 1
+allmodules[&quot;orb&quot;] = 1
+
+
+grid_container = Geyser.Container:new({
+	name = &quot;grid_container&quot;,
+	x = grid_x, y = grid_y,
+	width = &quot;25%&quot;,
+	height = &quot;25%&quot;,
+})
+
+grid_background_label = Geyser.Label:new({
+	name = &quot;grid_background_label&quot;,
+	x = 0, y = 0,
+	width = &quot;100%&quot;,
+	height = &quot;100%&quot;,
+}, grid_container)
+
+grid_background_label:setStyleSheet([[
+	background-color: dimgray;
+]])
+
+grid_title_bar = Geyser.Label:new({
+	name = &quot;grid_title_bar&quot;,
+	x = &quot;5%&quot;, y = 0,
+	height = &quot;8%&quot;,
+	width = &quot;95%&quot;,
+	message = [[&lt;center&gt;Grid Module&lt;/center&gt;]]
+}, grid_container)
+
+grid_title_bar:setStyleSheet([[
+	background-color: darkslategray;
+]])
+
+grid_drag_move = Geyser.Label:new({
+	name = &quot;grid_drag_move&quot;,
+	x = 0, y = 0,
+	width = &quot;5%&quot;,
+	height = &quot;8%&quot;,
+	message = [[+]]
+}, grid_container)
+
+grid_drag_move:setStyleSheet([[
+	background-color: darkslategray;
+]])
+grid_hide = Geyser.Label:new({
+	name = &quot;grid_hide&quot;,
+	x = &quot;95%&quot;, y = 0,
+	width = &quot;5%&quot;,
+	height = &quot;8%&quot;,
+	message = [[&lt;center&gt;X&lt;/center&gt;]]
+}, grid_container)
+grid_hide:setStyleSheet([[
+	background-color: darkslategray
+]])
+function gridhide()
+grid_container:hide()
+end
+grid_hide:setClickCallback(&quot;gridhide&quot;)
+
+local left_buttons = {
+	{text = &quot;Repair Hull&quot;, send = &quot;grid repair hull&quot;},
+	{text = &quot;Repair Grid&quot;, send = &quot;grid repair module &quot;..allmodules[&quot;grid&quot;]},
+	{text = &quot;Repair Chair&quot;, send = &quot;grid repair module &quot;..allmodules[&quot;chair&quot;]},
+	{text = &quot;Repair Turret1&quot;, send = &quot;grid repair module &quot;..allmodules[&quot;turret1&quot;]},
+	{text = &quot;Repair Turret2&quot;, send = &quot;grid repair module &quot;..allmodules[&quot;turret2&quot;]},
+	{text = &quot;Repair Turret3&quot;, send = &quot;grid repair module &quot;..allmodules[&quot;turret3&quot;]},
+	{text = &quot;Repair Orb&quot;, send = &quot;grid repair module &quot;..allmodules[&quot;orb&quot;]},
+}
+local middle_buttons = {
+	{text = &quot;Repair Module&quot;, send = &quot;grid repair module&quot;},
+	{text = &quot;Clarity Grid&quot;, send = &quot;grid clarity &quot;..allmodules[&quot;grid&quot;]},
+	{text = &quot;Clarity Chair&quot;, send = &quot;grid clarity &quot;..allmodules[&quot;chair&quot;]},
+	{text = &quot;Clarity Turret1&quot;, send = &quot;grid clarity &quot;..allmodules[&quot;turret1&quot;]},
+	{text = &quot;Clarity Turret2&quot;, send = &quot;grid clarity &quot;..allmodules[&quot;turret2&quot;]},
+	{text = &quot;Clarity Turret3&quot;, send = &quot;grid clarity &quot;..allmodules[&quot;turret3&quot;]},
+	{text = &quot;Clarity Orb&quot;, send = &quot;grid clarity &quot;..allmodules[&quot;orb&quot;]},
+}
+local right_buttons = {
+	{text = &quot;Analyze Ship&quot;, send = &quot;grid analyze ship &quot;..target_ship},
+	{text = &quot;Planarbond&quot;, send = &quot;grid planarbond&quot;},
+	{text = &quot;Flush&quot;, send = &quot;grid flush&quot;},
+	{text = &quot;Regenerate Chair&quot;, send = &quot;grid regenerate &quot;..allmodules[&quot;chair&quot;]},
+	{text = &quot;Regenerate Turret1&quot;, send = &quot;grid regenerate &quot;..allmodules[&quot;turret1&quot;]},
+	{text = &quot;Regenerate Turret2&quot;, send = &quot;grid regenerate &quot;..allmodules[&quot;turret2&quot;]},
+	{text = &quot;Regenerate Turret3&quot;, send = &quot;grid regenerate &quot;..allmodules[&quot;turret3&quot;]},
+}
+
+ grid_vbox1 = Geyser.VBox:new({
+	name = &quot;grid_vbox1&quot;,
+	x = 0, y = &quot;8%&quot;,
+	width = &quot;33%&quot;,
+	height = &quot;100%&quot;,
+}, grid_container)
+ grid_vbox2 = Geyser.VBox:new({
+	name = &quot;grid_vbox2&quot;,
+	x = &quot;33%&quot;, y = &quot;8%&quot;,
+	width = &quot;33%&quot;,
+	height = &quot;100%&quot;,
+}, grid_container)
+ grid_vbox3 = Geyser.VBox:new({
+	name = &quot;grid_vbox3&quot;,
+	x = &quot;66%&quot;, y = &quot;8%&quot;,
+	width = &quot;34%&quot;,
+	height = &quot;100%&quot;,
+}, grid_container)
+function grid_button(data)
+send(&quot;&quot;..data)
+end
+for k, v in ipairs(left_buttons) do
+	local name = v.text
+	name = Geyser.Label:new({
+	name = name,
+	message = [[&lt;center&gt;]]..v.text..[[&lt;/center&gt;]]
+	}, grid_vbox1)
+	name:setStyleSheet([[
+	background-color: rgb(27, 30, 35);
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+	]])
+	name:setClickCallback(&quot;grid_button&quot;, v.send)
+end
+for k, v in ipairs(middle_buttons) do
+	local name = v.text
+	name = Geyser.Label:new({
+	name = name,
+	message = [[&lt;center&gt;]]..v.text..[[&lt;/center&gt;]]
+	}, grid_vbox2)
+	name:setStyleSheet([[
+	background-color: rgb(27, 30, 35);
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+	]])
+	name:setClickCallback(&quot;grid_button&quot;, v.send)
+end
+for k, v in ipairs(right_buttons) do
+	local name = v.text
+	name = Geyser.Label:new({
+	name = name,
+	message = [[&lt;center&gt;]]..v.text..[[&lt;/center&gt;]]
+	}, grid_vbox3)
+	name:setStyleSheet([[
+	background-color: rgb(27, 30, 35);
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+	]])
+	name:setClickCallback(&quot;grid_button&quot;, v.send)
+end
+
+
+function on_click()
+enableTimer(&quot;grid_drag_window&quot;)
+end
+function on_release()
+disableTimer(&quot;grid_drag_window&quot;)
+end
+grid_drag_move:setClickCallback(&quot;on_click&quot;)
+grid_drag_move:setReleaseCallback(&quot;on_release&quot;)
+
+grid_container:hide()
+</script>
+            <eventHandlerList/>
+        </Script>
+        <Script isActive="yes" isFolder="no">
+            <name>Pilot Module</name>
+            <packageName></packageName>
+            <script>chair_x = chair_x or 10
+chair_y = chair_y or 10
+
+chair_container = Geyser.Container:new({
+	name = &quot;chair_container&quot;,
+	x = chair_x, y = chair_y,
+	width = &quot;20%&quot;,
+	height = &quot;20%&quot;,
+	
+})
+
+chair_background_label = Geyser.Label:new({
+	name = &quot;chair_background_label&quot;,
+	x = 0, y = 0,
+	width = &quot;100%&quot;,
+	height = &quot;100%&quot;,
+	
+}, chair_container)
+chair_background_label:setStyleSheet([[
+	background-color: dimgray;
+]])
+
+chair_title_bar = Geyser.Label:new({
+	name = &quot;chair_title_bar&quot;,
+	x = &quot;5%&quot;, y = 0,
+	width = &quot;95%&quot;,
+	height = &quot;8%&quot;,
+	message = [[&lt;center&gt;Chair Module&lt;/center&gt;]]
+}, chair_container)
+chair_title_bar:setStyleSheet([[
+	background-color: darkslategray;
+]])
+
+chair_drag_move = Geyser.Label:new({
+	name = &quot;chair_drag_move&quot;,
+	x = 0, y = 0,
+	width = &quot;5%&quot;,
+	height = &quot;8%&quot;,
+	message = [[&lt;center&gt;+&lt;/center&gt;]]
+}, chair_container)
+chair_drag_move:setStyleSheet([[
+	background-color: darkslategray;
+]])
+chair_hide = Geyser.Label:new({
+	name = &quot;chair_hide&quot;,
+	x = &quot;95%&quot;, y = 0,
+	width = &quot;5%&quot;,
+	height = &quot;8%&quot;,
+	message = [[&lt;center&gt;X&lt;/center&gt;]]
+}, chair_container)
+chair_hide:setStyleSheet([[
+	background-color: darkslategray;
+]])
+function chairhide()
+chair_container:hide()
+end
+chair_hide:setClickCallback(&quot;chairhide&quot;)
+local col1 = {
+	{text = &quot;G-NW&quot;, send = &quot;pilot glide nw&quot;},
+	{text = &quot;1&quot;, send = &quot;&quot;},
+	{text = &quot;G-W&quot;, send = &quot;pilot glide w&quot;},
+	{text = &quot;2&quot;, send = &quot;&quot;},
+	{text = &quot;G-SW&quot;, send = &quot;pilot glide sw&quot;},
+}
+local col2 = {
+	{text = &quot;3&quot;, send = &quot;&quot;},
+	{text = &quot;NW&quot;, send = &quot;pilot steer nw&quot;},
+	{text = &quot;W&quot;, send = &quot;pilot steer w&quot;},
+	{text = &quot;SW&quot;, send = &quot;pilot steer sw&quot;},
+	{text = &quot;4&quot;, send = &quot;&quot;},
+}
+local col3 = {
+	{text = &quot;G-N&quot;, send = &quot;pilot glide n&quot;},
+	{text = &quot;N&quot;, send = &quot;pilot steer n&quot;},
+	{text = &quot;Stop&quot;, send = &quot;pilot glide stop&quot;},
+	{text = &quot;S&quot;, send = &quot;pilot steer s&quot;},
+	{text = &quot;G-S&quot;, send = &quot;pilot glide s&quot;},
+}
+local col4 = {
+	{text = &quot;5&quot;, send = &quot;&quot;},
+	{text = &quot;NE&quot;, send = &quot;pilot steer ne&quot;},
+	{text = &quot;E&quot;, send = &quot;pilot steer e&quot;},
+	{text = &quot;SE&quot;, send = &quot;pilot steer se&quot;},
+	{text = &quot;6&quot;, send = &quot;&quot;},
+}
+local col5 = {
+	{text = &quot;G-NE&quot;, send = &quot;pilot glide ne&quot;},
+	{text = &quot;Launch&quot;, send = &quot;pilot launch&quot;},
+	{text = &quot;G-E&quot;, send = &quot;pilot glide e&quot;},
+	{text = &quot;Dock&quot;, send = &quot;pilot dock&quot;},
+	{text = &quot;G-SE&quot;, send = &quot;pilot glide se&quot;},
+}
+local col6 = {
+	{text = &quot;Silent On&quot;, send = &quot;pilot silentrun start&quot;},
+	{text = &quot;Silent Off&quot;, send = &quot;pilot silentrun stop&quot;},
+	{text = &quot;Farhorizon On&quot;, send = &quot;pilot farhorizon start&quot;},
+	{text = &quot;Farhorizon Off&quot;, send = &quot;pilot farhorizon stop&quot;},
+	{text = &quot;Forcefield&quot;, send = &quot;pilot forcefield&quot;},	
+}
+local width = 15
+
+ chair_vbox1 = Geyser.VBox:new({
+	name = &quot;chair_vbox1&quot;,
+	x = 0, y = &quot;8%&quot;,
+	width = width..&quot;%&quot;,
+	height = &quot;100%&quot;,
+}, chair_container)
+
+ chair_vbox2 = Geyser.VBox:new({
+	name = &quot;chair_vbox2&quot;,
+	x = &quot;15%&quot;, y = &quot;8%&quot;,
+	width = width..&quot;%&quot;,
+	height = &quot;100%&quot;,
+}, chair_container)
+
+ chair_vbox3 = Geyser.VBox:new({
+	name = &quot;chair_vbox3&quot;,
+	x = &quot;30%&quot;, y = &quot;8%&quot;,
+	width = width..&quot;%&quot;,
+	height = &quot;100%&quot;,
+}, chair_container)
+ chair_vbox4 = Geyser.VBox:new({
+	name = &quot;chair_vbox4&quot;,
+	x = &quot;45%&quot;, y = &quot;8%&quot;,
+	width = width..&quot;%&quot;,
+	height = &quot;100%&quot;,
+}, chair_container)
+ chair_vbox5 = Geyser.VBox:new({
+	name = &quot;chair_vbox5&quot;,
+	x = &quot;60%&quot;, y = &quot;8%&quot;,
+	width = width..&quot;%&quot;,
+	height = &quot;100%&quot;,
+}, chair_container)
+ chair_vbox6 = Geyser.VBox:new({
+	name = &quot;chair_vbox6&quot;,
+	x = &quot;75%&quot;, y = &quot;8%&quot;,
+	width = &quot;25%&quot;,
+	height = &quot;100%&quot;,
+}, chair_container)
+chair_hbox1 = Geyser.HBox:new({
+	name = &quot;chair_hbox1&quot;,
+	x = 0, y = &quot;108%&quot;,
+	width = &quot;100%&quot;,
+	height = &quot;20%&quot;,
+}, chair_container)
+ship_look = Geyser.Label:new({
+	name = &quot;ship_look&quot;,
+	message = [[&lt;center&gt;Ship Look&lt;/center&gt;]]
+	
+}, chair_hbox1)
+ship_look:setStyleSheet([[
+	background-color: rgb(27, 30, 35);
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+]])
+ship_status = Geyser.Label:new({
+	name = &quot;ship_status&quot;,
+	message = [[&lt;center&gt;Ship Status&lt;/center&gt;]]
+	
+}, chair_hbox1)
+ship_status:setStyleSheet([[
+	background-color: rgb(27, 30, 35);
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+]])
+
+function chair_button(data)
+send(data)
+end
+ship_look:setClickCallback(&quot;chair_button&quot;, &quot;ship look&quot;)
+ship_status:setClickCallback(&quot;chair_button&quot;, &quot;ship status&quot;)
+for k, v in ipairs(col1) do
+	local name = v.text
+	if string.match(v.text, &quot;%d+&quot;) then
+	msg = &quot; &quot;
+	else
+	msg = v.text
+	end
+	name = Geyser.Label:new({
+	name = name,
+	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
+	}, chair_vbox1)
+	name:setStyleSheet([[
+	background-color: rgb(27, 30, 35);
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+	]])
+  name:setClickCallback(&quot;chair_button&quot;, v.send)
+end
+
+for k, v in ipairs(col2) do
+	local name = v.text
+	if string.match(v.text, &quot;%d+&quot;) then
+	msg = &quot; &quot;
+	else
+	msg = v.text
+	end
+	name = Geyser.Label:new({
+	name = name,
+	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
+	}, chair_vbox2)
+	name:setStyleSheet([[
+	background-color: rgb(27, 30, 35);
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+	]])
+	name:setClickCallback(&quot;chair_button&quot;, v.send)
+end
+
+for k, v in ipairs(col3) do
+	local name = v.text
+	if string.match(v.text, &quot;%d+&quot;) then
+	msg = &quot; &quot;
+	else
+	msg = v.text
+	end
+	name = Geyser.Label:new({
+	name = name,
+	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
+	}, chair_vbox3)
+	name:setStyleSheet([[
+	background-color: rgb(27, 30, 35);
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+	]])
+	name:setClickCallback(&quot;chair_button&quot;, v.send)
+end
+
+for k, v in ipairs(col4) do
+	local name = v.text
+	if string.match(v.text, &quot;%d+&quot;) then
+	msg = &quot; &quot;
+	else
+	msg = v.text
+	end
+	name = Geyser.Label:new({
+	name = name,
+	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
+	}, chair_vbox4)
+	name:setStyleSheet([[
+	background-color: rgb(27, 30, 35);
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+	]])
+	name:setClickCallback(&quot;chair_button&quot;, v.send)
+end
+
+for k, v in ipairs(col5) do
+	local name = v.text
+	if string.match(v.text, &quot;%d&quot;) then
+	msg = &quot; &quot;
+	else
+	msg = v.text
+	end
+	name = Geyser.Label:new({
+	name = name,
+	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
+	}, chair_vbox5)
+	name:setStyleSheet([[
+	background-color: rgb(27, 30, 35);
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+	]])
+	name:setClickCallback(&quot;chair_button&quot;, v.send)
+end
+
+for k, v in ipairs(col6) do
+	local name = v.text
+	if string.match(v.text, &quot;%d&quot;) then
+	msg = &quot; &quot;
+	else
+	msg = v.text
+	end
+	name = Geyser.Label:new({
+	name = name,
+	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
+	}, chair_vbox6)
+	name:setStyleSheet([[
+	background-color: rgb(27, 30, 35);
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+	]])
+	name:setClickCallback(&quot;chair_button&quot;, v.send)
+end
+
+function chair_on_click()
+enableTimer(&quot;chair_drag_window&quot;)
+end
+function chair_on_release()
+disableTimer(&quot;chair_drag_window&quot;)
+end
+chair_drag_move:setClickCallback(&quot;chair_on_click&quot;)
+chair_drag_move:setReleaseCallback(&quot;chair_on_release&quot;)
+chair_container:hide()</script>
+            <eventHandlerList/>
+        </Script>
+    </ScriptPackage>
+    <KeyPackage/>
+</MudletPackage>
