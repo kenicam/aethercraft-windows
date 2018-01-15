@@ -158,9 +158,19 @@ chair_y = y</script>
         <Script isActive="yes" isFolder="no">
             <name>Grid Window</name>
             <packageName></packageName>
-            <script>grid_x = grid_x or 10
-grid_y = gird_y or 10
+            <script>grid_x = grid_x or 50
+grid_y = gird_y or 50
 target_ship = 11111
+
+local background_color = &quot;rgb(153, 179, 255)&quot;
+local title_color = &quot;rgb(0 , 85, 128)&quot;
+local border_color = &quot;rgb(122, 122, 82)&quot;
+local button_color = &quot;rgb(27, 30, 35)&quot;
+
+--[[ 
+https://www.w3schools.com/colors/colors_picker.asp
+--]]
+
 allmodules = {}
 allmodules[&quot;grid&quot;] = 1
 allmodules[&quot;chair&quot;] = 1
@@ -185,7 +195,7 @@ grid_background_label = Geyser.Label:new({
 }, grid_container)
 
 grid_background_label:setStyleSheet([[
-	background-color: dimgray;
+	background-color: ]]..background_color..[[;
 ]])
 
 grid_title_bar = Geyser.Label:new({
@@ -197,7 +207,7 @@ grid_title_bar = Geyser.Label:new({
 }, grid_container)
 
 grid_title_bar:setStyleSheet([[
-	background-color: darkslategray;
+	background-color: ]]..title_color..[[;
 ]])
 
 grid_drag_move = Geyser.Label:new({
@@ -209,7 +219,7 @@ grid_drag_move = Geyser.Label:new({
 }, grid_container)
 
 grid_drag_move:setStyleSheet([[
-	background-color: darkslategray;
+	background-color: ]]..title_color..[[;
 ]])
 grid_hide = Geyser.Label:new({
 	name = &quot;grid_hide&quot;,
@@ -219,7 +229,7 @@ grid_hide = Geyser.Label:new({
 	message = [[&lt;center&gt;X&lt;/center&gt;]]
 }, grid_container)
 grid_hide:setStyleSheet([[
-	background-color: darkslategray
+	background-color: ]]..title_color..[[
 ]])
 function gridhide()
 grid_container:hide()
@@ -282,10 +292,10 @@ for k, v in ipairs(left_buttons) do
 	message = [[&lt;center&gt;]]..v.text..[[&lt;/center&gt;]]
 	}, grid_vbox1)
 	name:setStyleSheet([[
-	background-color: rgb(27, 30, 35);
+	background-color: ]]..button_color..[[;
   border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: ]]..border_color..[[;
   border-radius: 10px;
 	]])
 	name:setClickCallback(&quot;grid_button&quot;, v.send)
@@ -297,10 +307,10 @@ for k, v in ipairs(middle_buttons) do
 	message = [[&lt;center&gt;]]..v.text..[[&lt;/center&gt;]]
 	}, grid_vbox2)
 	name:setStyleSheet([[
-	background-color: rgb(27, 30, 35);
+	background-color: ]]..button_color..[[;
   border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: ]]..border_color..[[;
   border-radius: 10px;
 	]])
 	name:setClickCallback(&quot;grid_button&quot;, v.send)
@@ -312,10 +322,10 @@ for k, v in ipairs(right_buttons) do
 	message = [[&lt;center&gt;]]..v.text..[[&lt;/center&gt;]]
 	}, grid_vbox3)
 	name:setStyleSheet([[
-	background-color: rgb(27, 30, 35);
+	background-color: ]]..button_color..[[;
   border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: ]]..border_color..[[;
   border-radius: 10px;
 	]])
 	name:setClickCallback(&quot;grid_button&quot;, v.send)
@@ -331,7 +341,7 @@ end
 grid_drag_move:setClickCallback(&quot;on_click&quot;)
 grid_drag_move:setReleaseCallback(&quot;on_release&quot;)
 
-grid_container:hide()
+grid_container:show()
 </script>
             <eventHandlerList/>
         </Script>
@@ -340,12 +350,20 @@ grid_container:hide()
             <packageName></packageName>
             <script>chair_x = chair_x or 10
 chair_y = chair_y or 10
+local background_color = &quot;rgb(153, 179, 255)&quot;
+local title_color = &quot;rgb(0 , 85, 128)&quot;
+local border_color = &quot;rgb(122, 122, 82)&quot;
+local button_color = &quot;rgb(27, 30, 35)&quot;
+
+--[[ 
+https://www.w3schools.com/colors/colors_picker.asp
+--]]
 
 chair_container = Geyser.Container:new({
 	name = &quot;chair_container&quot;,
 	x = chair_x, y = chair_y,
-	width = &quot;20%&quot;,
-	height = &quot;20%&quot;,
+	width = &quot;25%&quot;,
+	height = &quot;25%&quot;,
 	
 })
 
@@ -353,11 +371,11 @@ chair_background_label = Geyser.Label:new({
 	name = &quot;chair_background_label&quot;,
 	x = 0, y = 0,
 	width = &quot;100%&quot;,
-	height = &quot;100%&quot;,
+	height = &quot;128%&quot;,
 	
 }, chair_container)
 chair_background_label:setStyleSheet([[
-	background-color: dimgray;
+	background-color: ]]..background_color..[[;
 ]])
 
 chair_title_bar = Geyser.Label:new({
@@ -368,7 +386,7 @@ chair_title_bar = Geyser.Label:new({
 	message = [[&lt;center&gt;Chair Module&lt;/center&gt;]]
 }, chair_container)
 chair_title_bar:setStyleSheet([[
-	background-color: darkslategray;
+	background-color: ]]..title_color..[[;
 ]])
 
 chair_drag_move = Geyser.Label:new({
@@ -379,7 +397,7 @@ chair_drag_move = Geyser.Label:new({
 	message = [[&lt;center&gt;+&lt;/center&gt;]]
 }, chair_container)
 chair_drag_move:setStyleSheet([[
-	background-color: darkslategray;
+	background-color: ]]..title_color..[[;
 ]])
 chair_hide = Geyser.Label:new({
 	name = &quot;chair_hide&quot;,
@@ -389,7 +407,7 @@ chair_hide = Geyser.Label:new({
 	message = [[&lt;center&gt;X&lt;/center&gt;]]
 }, chair_container)
 chair_hide:setStyleSheet([[
-	background-color: darkslategray;
+	background-color: ]]..title_color..[[;
 ]])
 function chairhide()
 chair_container:hide()
@@ -479,7 +497,7 @@ local width = 15
 }, chair_container)
 chair_hbox1 = Geyser.HBox:new({
 	name = &quot;chair_hbox1&quot;,
-	x = 0, y = &quot;108%&quot;,
+	x = 0, y = &quot;107%&quot;,
 	width = &quot;100%&quot;,
 	height = &quot;20%&quot;,
 }, chair_container)
@@ -489,10 +507,10 @@ ship_look = Geyser.Label:new({
 	
 }, chair_hbox1)
 ship_look:setStyleSheet([[
-	background-color: rgb(27, 30, 35);
+	background-color: ]]..button_color..[[;
   border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: ]]..border_color..[[;
   border-radius: 10px;
 ]])
 ship_status = Geyser.Label:new({
@@ -501,10 +519,10 @@ ship_status = Geyser.Label:new({
 	
 }, chair_hbox1)
 ship_status:setStyleSheet([[
-	background-color: rgb(27, 30, 35);
+	background-color: ]]..button_color..[[;
   border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: ]]..border_color..[[;
   border-radius: 10px;
 ]])
 
@@ -525,10 +543,10 @@ for k, v in ipairs(col1) do
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox1)
 	name:setStyleSheet([[
-	background-color: rgb(27, 30, 35);
+	background-color: ]]..button_color..[[;
   border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: ]]..border_color..[[;
   border-radius: 10px;
 	]])
   name:setClickCallback(&quot;chair_button&quot;, v.send)
@@ -546,10 +564,10 @@ for k, v in ipairs(col2) do
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox2)
 	name:setStyleSheet([[
-	background-color: rgb(27, 30, 35);
+	background-color: ]]..button_color..[[;
   border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: ]]..border_color..[[;
   border-radius: 10px;
 	]])
 	name:setClickCallback(&quot;chair_button&quot;, v.send)
@@ -567,10 +585,10 @@ for k, v in ipairs(col3) do
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox3)
 	name:setStyleSheet([[
-	background-color: rgb(27, 30, 35);
+	background-color: ]]..button_color..[[;
   border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: ]]..border_color..[[;
   border-radius: 10px;
 	]])
 	name:setClickCallback(&quot;chair_button&quot;, v.send)
@@ -588,10 +606,10 @@ for k, v in ipairs(col4) do
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox4)
 	name:setStyleSheet([[
-	background-color: rgb(27, 30, 35);
+	background-color: ]]..button_color..[[;
   border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: ]]..border_color..[[;
   border-radius: 10px;
 	]])
 	name:setClickCallback(&quot;chair_button&quot;, v.send)
@@ -609,10 +627,10 @@ for k, v in ipairs(col5) do
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox5)
 	name:setStyleSheet([[
-	background-color: rgb(27, 30, 35);
+	background-color: ]]..button_color..[[;
   border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: ]]..border_color..[[;
   border-radius: 10px;
 	]])
 	name:setClickCallback(&quot;chair_button&quot;, v.send)
@@ -630,10 +648,10 @@ for k, v in ipairs(col6) do
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox6)
 	name:setStyleSheet([[
-	background-color: rgb(27, 30, 35);
+	background-color: ]]..button_color..[[;
   border-width: 1px;
   border-style: solid;
-  border-color: green;
+  border-color: ]]..border_color..[[;
   border-radius: 10px;
 	]])
 	name:setClickCallback(&quot;chair_button&quot;, v.send)
@@ -647,7 +665,7 @@ disableTimer(&quot;chair_drag_window&quot;)
 end
 chair_drag_move:setClickCallback(&quot;chair_on_click&quot;)
 chair_drag_move:setReleaseCallback(&quot;chair_on_release&quot;)
-chair_container:hide()</script>
+chair_container:show()</script>
             <eventHandlerList/>
         </Script>
     </ScriptPackage>
