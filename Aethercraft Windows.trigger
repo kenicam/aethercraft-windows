@@ -348,7 +348,7 @@ end
 grid_drag_move:setClickCallback(&quot;on_click&quot;)
 grid_drag_move:setReleaseCallback(&quot;on_release&quot;)
 
-grid_container:show()
+grid_container:hide()
 </script>
             <eventHandlerList/>
         </Script>
@@ -684,7 +684,7 @@ disableTimer(&quot;chair_drag_window&quot;)
 end
 chair_drag_move:setClickCallback(&quot;chair_on_click&quot;)
 chair_drag_move:setReleaseCallback(&quot;chair_on_release&quot;)
-chair_container:show()</script>
+chair_container:hide()</script>
             <eventHandlerList/>
         </Script>
     </ScriptPackage>
