@@ -166,6 +166,7 @@ local background_color = &quot;rgb(153, 179, 255)&quot;
 local title_color = &quot;rgb(0 , 85, 128)&quot;
 local border_color = &quot;rgb(122, 122, 82)&quot;
 local button_color = &quot;rgb(27, 30, 35)&quot;
+local text_color = &quot;goldenrod&quot;  --this one has to be a word, until I can figure out how to do it differently
 
 --[[ 
 https://www.w3schools.com/colors/colors_picker.asp
@@ -203,6 +204,7 @@ grid_title_bar = Geyser.Label:new({
 	x = &quot;5%&quot;, y = 0,
 	height = &quot;8%&quot;,
 	width = &quot;95%&quot;,
+	fgColor = text_color,
 	message = [[&lt;center&gt;Grid Module&lt;/center&gt;]]
 }, grid_container)
 
@@ -215,6 +217,7 @@ grid_drag_move = Geyser.Label:new({
 	x = 0, y = 0,
 	width = &quot;5%&quot;,
 	height = &quot;8%&quot;,
+	fgColor = text_color,
 	message = [[+]]
 }, grid_container)
 
@@ -226,6 +229,7 @@ grid_hide = Geyser.Label:new({
 	x = &quot;95%&quot;, y = 0,
 	width = &quot;5%&quot;,
 	height = &quot;8%&quot;,
+	fgColor = text_color,
 	message = [[&lt;center&gt;X&lt;/center&gt;]]
 }, grid_container)
 grid_hide:setStyleSheet([[
@@ -289,6 +293,7 @@ for k, v in ipairs(left_buttons) do
 	local name = v.text
 	name = Geyser.Label:new({
 	name = name,
+	fgColor = text_color,
 	message = [[&lt;center&gt;]]..v.text..[[&lt;/center&gt;]]
 	}, grid_vbox1)
 	name:setStyleSheet([[
@@ -304,6 +309,7 @@ for k, v in ipairs(middle_buttons) do
 	local name = v.text
 	name = Geyser.Label:new({
 	name = name,
+	fgColor = text_color,
 	message = [[&lt;center&gt;]]..v.text..[[&lt;/center&gt;]]
 	}, grid_vbox2)
 	name:setStyleSheet([[
@@ -319,6 +325,7 @@ for k, v in ipairs(right_buttons) do
 	local name = v.text
 	name = Geyser.Label:new({
 	name = name,
+	fgColor = text_color,
 	message = [[&lt;center&gt;]]..v.text..[[&lt;/center&gt;]]
 	}, grid_vbox3)
 	name:setStyleSheet([[
@@ -354,6 +361,7 @@ local background_color = &quot;rgb(153, 179, 255)&quot;
 local title_color = &quot;rgb(0 , 85, 128)&quot;
 local border_color = &quot;rgb(122, 122, 82)&quot;
 local button_color = &quot;rgb(27, 30, 35)&quot;
+local text_color = &quot;goldenrod&quot;  --this one has to be a word, until I can figure out how to do it differently
 
 --[[ 
 https://www.w3schools.com/colors/colors_picker.asp
@@ -362,8 +370,8 @@ https://www.w3schools.com/colors/colors_picker.asp
 chair_container = Geyser.Container:new({
 	name = &quot;chair_container&quot;,
 	x = chair_x, y = chair_y,
-	width = &quot;25%&quot;,
-	height = &quot;25%&quot;,
+	width = &quot;23%&quot;,
+	height = &quot;23%&quot;,
 	
 })
 
@@ -383,6 +391,7 @@ chair_title_bar = Geyser.Label:new({
 	x = &quot;5%&quot;, y = 0,
 	width = &quot;95%&quot;,
 	height = &quot;8%&quot;,
+	fgColor = text_color,
 	message = [[&lt;center&gt;Chair Module&lt;/center&gt;]]
 }, chair_container)
 chair_title_bar:setStyleSheet([[
@@ -394,6 +403,7 @@ chair_drag_move = Geyser.Label:new({
 	x = 0, y = 0,
 	width = &quot;5%&quot;,
 	height = &quot;8%&quot;,
+	fgColor = text_color,
 	message = [[&lt;center&gt;+&lt;/center&gt;]]
 }, chair_container)
 chair_drag_move:setStyleSheet([[
@@ -404,6 +414,7 @@ chair_hide = Geyser.Label:new({
 	x = &quot;95%&quot;, y = 0,
 	width = &quot;5%&quot;,
 	height = &quot;8%&quot;,
+	fgColor = text_color,
 	message = [[&lt;center&gt;X&lt;/center&gt;]]
 }, chair_container)
 chair_hide:setStyleSheet([[
@@ -503,6 +514,7 @@ chair_hbox1 = Geyser.HBox:new({
 }, chair_container)
 ship_look = Geyser.Label:new({
 	name = &quot;ship_look&quot;,
+	fgColor = text_color,
 	message = [[&lt;center&gt;Ship Look&lt;/center&gt;]]
 	
 }, chair_hbox1)
@@ -515,6 +527,7 @@ ship_look:setStyleSheet([[
 ]])
 ship_status = Geyser.Label:new({
 	name = &quot;ship_status&quot;,
+	fgColor = text_color,
 	message = [[&lt;center&gt;Ship Status&lt;/center&gt;]]
 	
 }, chair_hbox1)
@@ -540,6 +553,7 @@ for k, v in ipairs(col1) do
 	end
 	name = Geyser.Label:new({
 	name = name,
+	fgColor = text_color,
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox1)
 	name:setStyleSheet([[
@@ -561,6 +575,7 @@ for k, v in ipairs(col2) do
 	end
 	name = Geyser.Label:new({
 	name = name,
+	fgColor = text_color,
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox2)
 	name:setStyleSheet([[
@@ -582,6 +597,7 @@ for k, v in ipairs(col3) do
 	end
 	name = Geyser.Label:new({
 	name = name,
+	fgColor = text_color,
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox3)
 	name:setStyleSheet([[
@@ -603,6 +619,7 @@ for k, v in ipairs(col4) do
 	end
 	name = Geyser.Label:new({
 	name = name,
+	fgColor = text_color,
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox4)
 	name:setStyleSheet([[
@@ -624,6 +641,7 @@ for k, v in ipairs(col5) do
 	end
 	name = Geyser.Label:new({
 	name = name,
+	fgColor = text_color,
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox5)
 	name:setStyleSheet([[
@@ -645,6 +663,7 @@ for k, v in ipairs(col6) do
 	end
 	name = Geyser.Label:new({
 	name = name,
+	fgColor = text_color,
 	message = [[&lt;center&gt;]]..msg..[[&lt;/center&gt;]]
 	}, chair_vbox6)
 	name:setStyleSheet([[
