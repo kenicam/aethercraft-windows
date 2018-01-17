@@ -134,9 +134,11 @@ end</script>
         <Timer isActive="no" isFolder="no" isTempTimer="no" isOffsetTimer="no">
             <name>grid_drag_window</name>
             <script>local x, y = getMousePosition()
-grid_container:move(x, y)
-grid_x = x
-grid_y = y</script>
+windowpositions.grid_x = x
+windowpositions.grid_y = y
+table.save(getMudletHomeDir() .. &quot;/windowpositions&quot;, windowpositions)
+grid_container:move(getMousePosition())
+</script>
             <command></command>
             <packageName></packageName>
             <time>00:00:00.025</time>
@@ -144,9 +146,33 @@ grid_y = y</script>
         <Timer isActive="no" isFolder="no" isTempTimer="no" isOffsetTimer="no">
             <name>chair_drag_window</name>
             <script>local x, y = getMousePosition()
-chair_container:move(x, y)
-chair_x = x
-chair_y = y</script>
+windowpositions.chair_x = x
+windowpositions.chair_y = y
+table.save(getMudletHomeDir() .. &quot;/windowpositions&quot;, windowpositions)
+chair_container:move(getMousePosition())
+</script>
+            <command></command>
+            <packageName></packageName>
+            <time>00:00:00.025</time>
+        </Timer>
+        <Timer isActive="no" isFolder="no" isTempTimer="no" isOffsetTimer="no">
+            <name>grid_resize_window</name>
+            <script>local x, y = getMousePosition()
+grid_new_width = windowpositions.grid_width + (x - windowpositions.grid_start_x)
+grid_new_height = windowpositions.grid_height + (y - windowpositions.grid_start_y)
+
+grid_container:resize(grid_new_width, grid_new_height)</script>
+            <command></command>
+            <packageName></packageName>
+            <time>00:00:00.025</time>
+        </Timer>
+        <Timer isActive="no" isFolder="no" isTempTimer="no" isOffsetTimer="no">
+            <name>chair_resize_window</name>
+            <script>local x, y = getMousePosition()
+chair_new_width = windowpositions.chair_width + (x - windowpositions.chair_start_x)
+chair_new_height = windowpositions.chair_height + (y - windowpositions.chair_start_y)
+
+chair_container:resize(chair_new_width, chair_new_height)</script>
             <command></command>
             <packageName></packageName>
             <time>00:00:00.025</time>
@@ -156,10 +182,35 @@ chair_y = y</script>
     <ActionPackage/>
     <ScriptPackage>
         <Script isActive="yes" isFolder="no">
+            <name>file_exists</name>
+            <packageName></packageName>
+            <script>function file_exists(name)
+   local f=io.open(name,&quot;r&quot;)
+   if f~=nil then io.close(f) return true else return false end
+end</script>
+            <eventHandlerList/>
+        </Script>
+        <Script isActive="yes" isFolder="no">
             <name>Grid Window</name>
             <packageName></packageName>
-            <script>grid_x = grid_x or 50
-grid_y = gird_y or 50
+            <script>
+windowpositions = {
+	grid_x = 50,
+	grid_y = 50,
+	chair_x = 50,
+	chair_y = 50,
+	chair_width = 400,
+	chair_height = 300,
+	grid_width = 400,
+	grid_height = 300,
+	chair_start_x = nil,
+	chair_start_y = nil,
+	grid_start_x = nil,
+	grid_start_y = nil,
+}
+if file_exists(getMudletHomeDir()..&quot;/windowpositions&quot;) then
+table.load(getMudletHomeDir() .. &quot;/windowpositions&quot;, windowpositions)
+end
 target_ship = 11111
 
 local background_color = &quot;rgb(153, 179, 255)&quot;
@@ -183,9 +234,9 @@ allmodules[&quot;orb&quot;] = 1
 
 grid_container = Geyser.Container:new({
 	name = &quot;grid_container&quot;,
-	x = grid_x, y = grid_y,
-	width = &quot;25%&quot;,
-	height = &quot;25%&quot;,
+	x = windowpositions.grid_x, y = windowpositions.grid_y,
+	width = windowpositions.grid_width,
+	height = windowpositions.grid_height,
 })
 
 grid_background_label = Geyser.Label:new({
@@ -272,19 +323,19 @@ local right_buttons = {
 	name = &quot;grid_vbox1&quot;,
 	x = 0, y = &quot;8%&quot;,
 	width = &quot;33%&quot;,
-	height = &quot;100%&quot;,
+	height = &quot;92%&quot;,
 }, grid_container)
  grid_vbox2 = Geyser.VBox:new({
 	name = &quot;grid_vbox2&quot;,
 	x = &quot;33%&quot;, y = &quot;8%&quot;,
 	width = &quot;33%&quot;,
-	height = &quot;100%&quot;,
+	height = &quot;92%&quot;,
 }, grid_container)
  grid_vbox3 = Geyser.VBox:new({
 	name = &quot;grid_vbox3&quot;,
 	x = &quot;66%&quot;, y = &quot;8%&quot;,
 	width = &quot;34%&quot;,
-	height = &quot;100%&quot;,
+	height = &quot;92%&quot;,
 }, grid_container)
 function grid_button(data)
 send(&quot;&quot;..data)
@@ -338,25 +389,62 @@ for k, v in ipairs(right_buttons) do
 	name:setClickCallback(&quot;grid_button&quot;, v.send)
 end
 
-
-function on_click()
+grid_resize_label = Geyser.Label:new({
+	x = &quot;95%&quot;, y = &quot;95%&quot;,
+	width = &quot;5%&quot;,
+	height = &quot;5%&quot;,
+	message = [[&lt;center&gt;*&lt;/center&gt;]]
+}, grid_container)
+grid_resize_label:setStyleSheet([[
+	background-color: rgba(0,0,0,0%);
+]])
+function grid_drag_click()
 enableTimer(&quot;grid_drag_window&quot;)
 end
-function on_release()
+function grid_drag_release()
 disableTimer(&quot;grid_drag_window&quot;)
 end
-grid_drag_move:setClickCallback(&quot;on_click&quot;)
-grid_drag_move:setReleaseCallback(&quot;on_release&quot;)
-
-grid_container:hide()
-</script>
+function grid_resize_click()
+windowpositions.grid_start_x, windowpositions.grid_start_y = getMousePosition()
+enableTimer(&quot;grid_resize_window&quot;)
+end
+function grid_resize_release()
+disableTimer(&quot;grid_resize_window&quot;)
+windowpositions.grid_width = grid_new_width
+windowpositions.grid_height = grid_new_height
+table.save(getMudletHomeDir() .. &quot;/windowpositions&quot;, windowpositions)
+end
+grid_resize_label:setClickCallback(&quot;grid_resize_click&quot;)
+grid_resize_label:setReleaseCallback(&quot;grid_resize_release&quot;)
+grid_drag_move:setClickCallback(&quot;grid_drag_click&quot;)
+grid_drag_move:setReleaseCallback(&quot;grid_drag_release&quot;)
+grid_container:show()</script>
             <eventHandlerList/>
         </Script>
         <Script isActive="yes" isFolder="no">
             <name>Pilot Module</name>
             <packageName></packageName>
-            <script>chair_x = chair_x or 10
-chair_y = chair_y or 10
+            <script>
+windowpositions = {
+	grid_x = 50,
+	grid_y = 50,
+	chair_x = 50,
+	chair_y = 50,
+	chair_width = 400,
+	chair_height = 300,
+	grid_width = 400,
+	grid_height = 300,
+	chair_start_x = nil,
+	chair_start_y = nil,
+	grid_start_x = nil,
+	grid_start_y = nil,
+}
+
+if file_exists(getMudletHomeDir()..&quot;/windowpositions&quot;) then
+table.load(getMudletHomeDir() .. &quot;/windowpositions&quot;, windowpositions)
+end
+
+
 local background_color = &quot;rgb(153, 179, 255)&quot;
 local title_color = &quot;rgb(0 , 85, 128)&quot;
 local border_color = &quot;rgb(122, 122, 82)&quot;
@@ -369,17 +457,16 @@ https://www.w3schools.com/colors/colors_picker.asp
 
 chair_container = Geyser.Container:new({
 	name = &quot;chair_container&quot;,
-	x = chair_x, y = chair_y,
-	width = &quot;23%&quot;,
-	height = &quot;23%&quot;,
-	
+	x = windowpositions.chair_x, y = windowpositions.chair_y,
+	width = windowpositions.chair_width,
+	height = windowpositions.chair_height,	
 })
 
 chair_background_label = Geyser.Label:new({
 	name = &quot;chair_background_label&quot;,
 	x = 0, y = 0,
 	width = &quot;100%&quot;,
-	height = &quot;128%&quot;,
+	height = &quot;100%&quot;,
 	
 }, chair_container)
 chair_background_label:setStyleSheet([[
@@ -472,45 +559,45 @@ local width = 15
 	name = &quot;chair_vbox1&quot;,
 	x = 0, y = &quot;8%&quot;,
 	width = width..&quot;%&quot;,
-	height = &quot;100%&quot;,
+	height = &quot;77%&quot;,
 }, chair_container)
 
  chair_vbox2 = Geyser.VBox:new({
 	name = &quot;chair_vbox2&quot;,
 	x = &quot;15%&quot;, y = &quot;8%&quot;,
 	width = width..&quot;%&quot;,
-	height = &quot;100%&quot;,
+	height = &quot;77%&quot;,
 }, chair_container)
 
  chair_vbox3 = Geyser.VBox:new({
 	name = &quot;chair_vbox3&quot;,
 	x = &quot;30%&quot;, y = &quot;8%&quot;,
 	width = width..&quot;%&quot;,
-	height = &quot;100%&quot;,
+	height = &quot;77%&quot;,
 }, chair_container)
  chair_vbox4 = Geyser.VBox:new({
 	name = &quot;chair_vbox4&quot;,
 	x = &quot;45%&quot;, y = &quot;8%&quot;,
 	width = width..&quot;%&quot;,
-	height = &quot;100%&quot;,
+	height = &quot;77%&quot;,
 }, chair_container)
  chair_vbox5 = Geyser.VBox:new({
 	name = &quot;chair_vbox5&quot;,
 	x = &quot;60%&quot;, y = &quot;8%&quot;,
 	width = width..&quot;%&quot;,
-	height = &quot;100%&quot;,
+	height = &quot;77%&quot;,
 }, chair_container)
  chair_vbox6 = Geyser.VBox:new({
 	name = &quot;chair_vbox6&quot;,
 	x = &quot;75%&quot;, y = &quot;8%&quot;,
 	width = &quot;25%&quot;,
-	height = &quot;100%&quot;,
+	height = &quot;77%&quot;,
 }, chair_container)
 chair_hbox1 = Geyser.HBox:new({
 	name = &quot;chair_hbox1&quot;,
-	x = 0, y = &quot;107%&quot;,
+	x = 0, y = &quot;85%&quot;,
 	width = &quot;100%&quot;,
-	height = &quot;20%&quot;,
+	height = &quot;15%&quot;,
 }, chair_container)
 ship_look = Geyser.Label:new({
 	name = &quot;ship_look&quot;,
@@ -682,9 +769,37 @@ end
 function chair_on_release()
 disableTimer(&quot;chair_drag_window&quot;)
 end
-chair_drag_move:setClickCallback(&quot;chair_on_click&quot;)
-chair_drag_move:setReleaseCallback(&quot;chair_on_release&quot;)
-chair_container:hide()</script>
+
+chair_resize_label = Geyser.Label:new({
+	x = &quot;95%&quot;, y = &quot;95%&quot;,
+	width = &quot;5%&quot;,
+	height = &quot;5%&quot;,
+	message = [[&lt;center&gt;*&lt;/center&gt;]]
+}, chair_container)
+chair_resize_label:setStyleSheet([[
+	background-color: rgba(0,0,0,0%);
+]])
+function chair_drag_click()
+enableTimer(&quot;chair_drag_window&quot;)
+end
+function chair_drag_release()
+disableTimer(&quot;chair_drag_window&quot;)
+end
+function chair_resize_click()
+windowpositions.chair_start_x, windowpositions.chair_start_y = getMousePosition()
+enableTimer(&quot;chair_resize_window&quot;)
+end
+function chair_resize_release()
+disableTimer(&quot;chair_resize_window&quot;)
+windowpositions.chair_width = chair_new_width
+windowpositions.chair_height = chair_new_height
+table.save(getMudletHomeDir() .. &quot;/windowpositions&quot;, windowpositions)
+end
+chair_resize_label:setClickCallback(&quot;chair_resize_click&quot;)
+chair_resize_label:setReleaseCallback(&quot;chair_resize_release&quot;)
+chair_drag_move:setClickCallback(&quot;chair_drag_click&quot;)
+chair_drag_move:setReleaseCallback(&quot;chair_drag_release&quot;)
+chair_container:show()</script>
             <eventHandlerList/>
         </Script>
     </ScriptPackage>
